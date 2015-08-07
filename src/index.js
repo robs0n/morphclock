@@ -1,7 +1,7 @@
-import moment from 'moment';
 import 'styles/main.less';
 import {
-  isElement
+  isElement,
+  pad
 }
 from './utils';
 
@@ -35,7 +35,8 @@ let createMarkup = function() {
 };
 
 let updateDigits = function() {
-  let time = moment().format('HHmmss');
+  let date = new Date();
+  let time = [pad(date.getHours(), 2), pad(date.getMinutes(), 2), pad(date.getSeconds(), 2)].join('');
   let digits = target.querySelectorAll('.digit');
   for (let i = 0; i < digits.length; i++) {
     digits[i].className = digits[i].className.replace(/\sdigit-\d+/g, '');
@@ -48,4 +49,5 @@ export default function(targetIn) {
   target = isElement(target) ? target : document.body;
   createMarkup(target);
   setInterval(updateDigits, 1000);
+  return this;
 }
