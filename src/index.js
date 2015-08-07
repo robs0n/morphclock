@@ -44,10 +44,22 @@ let updateDigits = function() {
   }
 };
 
+// let test = function() {
+//   let max = 9;
+//   let i = 0;
+//   setInterval(function() {
+//     let digit = document.querySelector('.digit');
+//     digit.className = digit.className.replace(/\sdigit-\d+/g, '');
+//     digit.className += ' digit-' + i;
+//     i = i === max ? 0 : i + 1;
+//   }, 1500);
+// };
+
 export default function(targetIn) {
   target = typeof targetIn === 'string' ? document.querySelector(targetIn) : targetIn;
   target = isElement(target) ? target : document.body;
   createMarkup(target);
+  // test();
   setInterval(updateDigits, 1000);
   return this;
 }

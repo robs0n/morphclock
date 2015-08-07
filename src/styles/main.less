@@ -3,8 +3,9 @@
 @digitHeight: 2.5em;
 @barSize: 0.25em;
 @barGap: 0.2em;
-@digitColor: #00acff;
 
+@digitColor: #00acff;
+// @digitColor: #f00;
 .morphclock {
   position: relative;
   .part {
@@ -23,40 +24,48 @@
       height: @digitHeight;
       display: inline-block;
       .bar {
-        box-sizing:border-box;
-        background-color: @digitColor;
+        display: block;
+        box-sizing: border-box;
         position: absolute;
+        transition: all 0.5s;
+        &:before {
+          content: "";
+          display: block;
+          position: relative;
+          box-sizing: border-box;
+          background-color: @digitColor;
+          border: @barSize solid transparent;
+          border-radius: @barSize;
+          transition: all 0.5s;
+        }
         &.left,
         &.right {
           width: @barSize;
-          height: ((@digitHeight / 2) - (@barGap * 2));
-          border: @barSize solid transparent;
-          border-radius: @barSize;
-          border-left: none;
-          border-right: none;
+          height: (@digitHeight / 2);
+          &:before {
+            width: @barSize;
+            height: ((@digitHeight / 2) - (@barGap * 2));
+            border-left: none;
+            border-right: none;
+            margin-top: @barGap;
+          }
         }
         &.center {
-          left: @barGap;
-          width: (@digitWidth - (@barGap * 2));
+          width: @digitWidth;
           height: @barSize;
-          border: @barSize solid transparent;
-          border-radius: @barSize;
-          border-top: none;
-          border-bottom: none;
+          &:before {
+            width: (@digitWidth - (@barGap * 2));
+            height: @barSize;
+            border-top: none;
+            border-bottom: none;
+            margin-left: @barGap;
+          }
         }
         &.top {
           top: 0;
-          &.left,
-          &.right {
-            top: (@barGap + (@barSize / 4));
-          }
         }
         &.bottom {
-          bottom: 0;
-          &.left,
-          &.right {
-            bottom: (@barGap + (@barSize / 4));
-          }
+          bottom: @barGap;
         }
         &.left {
           left: 0;
@@ -65,7 +74,84 @@
           right: 0;
         }
         &.middle {
-          top: ((@digitHeight / 2) - (@barSize / 2));
+          top: ((@digitHeight / 2) - @barSize);
+        }
+      }
+      &-0,
+      &-1,
+      &-7 {
+        .middle {
+          .scale(0);
+        }
+      }
+      &-1 {
+        .center {
+          .scale(0);
+        }
+      }
+      &-2 {
+        .top {
+          &.left {
+            .scale(0);
+          }
+        }
+        .bottom {
+          &.right {
+            .scale(0);
+          }
+        }
+      }
+      &-1,
+      &-3,
+      &-7 {
+        .left {
+          .scale(0);
+        }
+      }
+      &-4 {
+        .top,
+        .bottom {
+          &.center {
+            .scale(0);
+          }
+        }
+        .bottom {
+          &.left {
+            .scale(0);
+          }
+        }
+      }
+      &-5 {
+        .top {
+          &.right {
+            .scale(0);
+          }
+        }
+        .bottom {
+          &.left {
+            .scale(0);
+          }
+        }
+      }
+      &-6 {
+        .top {
+          &.right {
+            .scale(0);
+          }
+        }
+      }
+      &-7 {
+        .bottom {
+          &.center {
+            .scale(0);
+          }
+        }
+      }
+      &-9 {
+        .bottom {
+          &.left {
+            .scale(0);
+          }
         }
       }
     }
