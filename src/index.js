@@ -1,9 +1,11 @@
+import moment from 'moment';
 import 'styles/main.less';
 import {
   isElement
 }
 from './utils';
 
+let target;
 let getDigitMarkup = function() {
   return `
     <div class="digit">
@@ -18,7 +20,7 @@ let getDigitMarkup = function() {
   `;
 };
 
-let createMarkup = function(target) {
+let createMarkup = function() {
   target.innerHTML = `<div class="morphclock">
     <div class="part hours">
       ` + getDigitMarkup() + getDigitMarkup() + `
@@ -32,8 +34,18 @@ let createMarkup = function(target) {
   </div>`;
 };
 
+let updateDigits = function() {
+  let time = moment().format('HHmmss');
+  let digits = target.querySelectorAll('.digit');
+  for (let i = 0; i < digits.length; i++) {
+    digits[i].className = digits[i].className.replace(/\sdigit-\d+/g, '');
+    digits[i].className += ' digit-' + time[i];
+  }
+};
+
 export default function(targetIn) {
-  let target = typeof targetIn === 'string' ? document.querySelector(targetIn) : targetIn;
+  target = typeof targetIn === 'string' ? document.querySelector(targetIn) : targetIn;
   target = isElement(target) ? target : document.body;
   createMarkup(target);
+  setInterval(updateDigits, 1000);
 }
