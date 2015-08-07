@@ -31,7 +31,10 @@ module.exports = {
   },
 
   resolve: {
-    extensions: ['', '.js']
+    extensions: ['', '.js'],
+    alias: {
+      styles: path.join(__dirname, 'src', 'styles')
+    }
   },
   module: {
     loaders: [{

@@ -1,0 +1,73 @@
+@import "~lesshat/build/lesshat.less";
+@digitWidth: 1.5em;
+@digitHeight: 2.5em;
+@barSize: 0.25em;
+@barGap: 0.2em;
+@digitColor: #00acff;
+
+.morphclock {
+  position: relative;
+  .part {
+    display: inline-block;
+    &:not(:last-child):after {
+      display: inline-block;
+      content: ":";
+      color: @digitColor;
+      font-size: @digitHeight;
+      line-height: 0.75em;
+      vertical-align: top;
+    }
+    .digit {
+      position: relative;
+      width: @digitWidth;
+      height: @digitHeight;
+      display: inline-block;
+      .bar {
+        box-sizing:border-box;
+        background-color: @digitColor;
+        position: absolute;
+        &.left,
+        &.right {
+          width: @barSize;
+          height: ((@digitHeight / 2) - (@barGap * 2));
+          border: @barSize solid transparent;
+          border-radius: @barSize;
+          border-left: none;
+          border-right: none;
+        }
+        &.center {
+          left: @barGap;
+          width: (@digitWidth - (@barGap * 2));
+          height: @barSize;
+          border: @barSize solid transparent;
+          border-radius: @barSize;
+          border-top: none;
+          border-bottom: none;
+        }
+        &.top {
+          top: 0;
+          &.left,
+          &.right {
+            top: (@barGap + (@barSize / 4));
+          }
+        }
+        &.bottom {
+          bottom: 0;
+          &.left,
+          &.right {
+            bottom: (@barGap + (@barSize / 4));
+          }
+        }
+        &.left {
+          left: 0;
+        }
+        &.right {
+          right: 0;
+        }
+        &.middle {
+          top: ((@digitHeight / 2) - (@barSize / 2));
+        }
+      }
+    }
+  }
+}

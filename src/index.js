@@ -1,3 +1,4 @@
+import 'styles/main.less';
 import {
   isElement
 }
@@ -6,13 +7,13 @@ from './utils';
 let getDigitMarkup = function() {
   return `
     <div class="digit">
-      <span class="top-left"></span>
-      <span class="top-center"></span>
-      <span class="top-right"></span>
-      <span class="middle"></span>
-      <span class="bottom-left"></span>
-      <span class="bottom-center"></span>
-      <span class="bottom-right"></span>
+      <div class="bar top left"></div>
+      <div class="bar top center"></div>
+      <div class="bar top right"></div>
+      <div class="bar middle center"></div>
+      <div class="bar bottom left"></div>
+      <div class="bar bottom center"></div>
+      <div class="bar bottom right"></div>
     </div>
   `;
 };
