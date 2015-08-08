@@ -1,0 +1,74 @@
+.morphclock {
+  position: relative;
+  .part {
+    display: inline-block;
+    &:not(:last-child):after {
+      display: inline-block;
+      content: ":";
+      color: @digitColor;
+      font-size: @digitHeight;
+      line-height: 0.75em;
+      vertical-align: top;
+    }
+    .digit {
+      position: relative;
+      width: @digitWidth;
+      height: @digitHeight;
+      display: inline-block;
+      .bar {
+        display: block;
+        box-sizing: border-box;
+        position: absolute;
+        transition: all 0.5s;
+        &:before {
+          content: "";
+          display: block;
+          position: relative;
+          box-sizing: border-box;
+          background-color: @digitColor;
+          border: @barSize solid transparent;
+          border-radius: @barSize;
+          transition: all 0.5s;
+        }
+        &.left,
+        &.right {
+          width: @barSize;
+          height: (@digitHeight / 2);
+          &:before {
+            width: @barSize;
+            height: ((@digitHeight / 2) - (@barGap * 2));
+            border-left: none;
+            border-right: none;
+            margin-top: @barGap;
+          }
+        }
+        &.center {
+          width: @digitWidth;
+          height: @barSize;
+          &:before {
+            width: (@digitWidth - (@barGap * 2));
+            height: @barSize;
+            border-top: none;
+            border-bottom: none;
+            margin-left: @barGap;
+          }
+        }
+        &.top {
+          top: 0;
+        }
+        &.bottom {
+          bottom: @barGap;
+        }
+        &.left {
+          left: 0;
+        }
+        &.right {
+          right: 0;
+        }
+        &.middle {
+          top: ((@digitHeight / 2) - @barSize);
+        }
+      }
+    }
+  }
+}

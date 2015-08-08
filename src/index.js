@@ -4,8 +4,12 @@ import {
   pad
 }
 from './utils';
+import assign from 'object-assign';
 
-let target;
+let defaultOptions = {
+  animation: 'scale'
+};
+
 let getDigitMarkup = function() {
   return `
     <div class="digit">
@@ -20,8 +24,9 @@ let getDigitMarkup = function() {
   `;
 };
 
-let createMarkup = function() {
-  target.innerHTML = `<div class="morphclock">
+let createMarkup = function(target, options) {
+  let el = document.createElement('div');
+  el.innerHTML = `<div class="morphclock ` + options.animation + `">
     <div class="part hours">
       ` + getDigitMarkup() + getDigitMarkup() + `
     </div>
@@ -32,9 +37,10 @@ let createMarkup = function() {
       ` + getDigitMarkup() + getDigitMarkup() + `
     </div>
   </div>`;
+  return target.appendChild(el.firstChild);
 };
 
-let updateDigits = function() {
+let updateDigits = function(target) {
   let date = new Date();
   let time = [pad(date.getHours(), 2), pad(date.getMinutes(), 2), pad(date.getSeconds(), 2)].join('');
   let digits = target.querySelectorAll('.digit');
@@ -44,22 +50,25 @@ let updateDigits = function() {
   }
 };
 
-// let test = function() {
+// let test = function(el) {
 //   let max = 9;
 //   let i = 0;
 //   setInterval(function() {
-//     let digit = document.querySelector('.digit');
+//     let digit = el.querySelector('.digit');
 //     digit.className = digit.className.replace(/\sdigit-\d+/g, '');
 //     digit.className += ' digit-' + i;
 //     i = i === max ? 0 : i + 1;
 //   }, 1500);
 // };
 
-export default function(targetIn) {
-  target = typeof targetIn === 'string' ? document.querySelector(targetIn) : targetIn;
+export default function(targetIn, optionsIn) {
+  let target = typeof targetIn === 'string' ? document.querySelector(targetIn) : targetIn;
   target = isElement(target) ? target : document.body;
-  createMarkup(target);
-  // test();
-  setInterval(updateDigits, 1000);
+  let options = assign({}, defaultOptions, optionsIn);
+  let el = createMarkup(target, options);
+  // test(el);
+  setInterval(function() {
+    updateDigits(el);
+  }, 1000);
   return this;
 }
