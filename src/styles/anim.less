@@ -161,4 +161,108 @@
       }
     }
   }
+  &.rotation {
+    .digit {
+      &-1,
+      &-3,
+      &-7 {
+        .left {
+          .transform-origin((@digitWidth / 2) 50%);
+          .rotate(180);
+        }
+      }
+      &-1,
+      &-7 {
+        .center {
+          &.middle,
+          &.bottom {
+            .transform-origin(@digitWidth 0);
+            .rotate(90);
+            &:before {
+              margin-left: (@barSize + @barGap);
+            }
+          }
+        }
+      }
+      &-1,
+      &-4 {
+        .center {
+          &.top {
+            .transform-origin(@digitWidth 100%);
+            .rotate(-90deg);
+            &:before {
+              margin-left: (@barSize + @barGap);
+            }
+          }
+        }
+      }
+      &-2 {
+        .left {
+          &.top {
+            .transform-origin((@digitWidth / 2) 50%);
+            .rotate(180);
+          }
+        }
+        .right {
+          &.bottom {
+            .transform-origin(50% (@barSize/2));
+            .rotate(90deg);
+          }
+        }
+      }
+      &-4 {
+        .bottom {
+          &.center {
+            .transform-origin(@digitWidth 0);
+            .rotate(90);
+            &:before {
+              margin-left: (@barSize + @barGap);
+            }
+          }
+          &.left {
+            .transform-origin((@digitWidth / 2) 50%);
+            .rotate(180);
+          }
+        }
+      }
+      &-5 {
+        .right {
+          &.top {
+            .transform-origin(50% ((@digitHeight/2) - (@barSize/2)));
+            .rotate(-90deg);
+          }
+        }
+        .left {
+          &.bottom {
+            .transform-origin((@digitWidth / 2) 50%);
+            .rotate(180);
+          }
+        }
+      }
+      &-6 {
+        .right {
+          &.top {
+            .transform-origin(50% ((@digitHeight/2) - (@barSize/2)));
+            .rotate(-90deg);
+          }
+        }
+      }
+      &-9 {
+        .left {
+          &.bottom {
+            .transform-origin((@digitWidth / 2) 50%);
+            .rotate(180);
+          }
+        }
+      }
+      &-0 {
+        .center {
+          &.middle {
+            .transform-origin((@barSize/2) 50%);
+            .rotate(90);
+          }
+        }
+      }
+    }
+  }
 }

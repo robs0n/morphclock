@@ -52,12 +52,13 @@ let updateDigits = function(target) {
 
 // let test = function(el) {
 //   let max = 9;
-//   let i = 0;
+//   let min = 0;
+//   let i = min;
 //   setInterval(function() {
 //     let digit = el.querySelector('.digit');
 //     digit.className = digit.className.replace(/\sdigit-\d+/g, '');
 //     digit.className += ' digit-' + i;
-//     i = i === max ? 0 : i + 1;
+//     i = i === max ? min : i + 1;
 //   }, 1500);
 // };
 
@@ -67,6 +68,7 @@ export default function(targetIn, optionsIn) {
   let options = assign({}, defaultOptions, optionsIn);
   let el = createMarkup(target, options);
   // test(el);
+  // updateDigits(el);
   setInterval(function() {
     updateDigits(el);
   }, 1000);
